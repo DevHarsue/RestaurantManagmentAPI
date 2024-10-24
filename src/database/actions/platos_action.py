@@ -1,22 +1,24 @@
 from typing import List
 from sqlalchemy import join,select
-from ..connection import session
-from ..schemas import TipoPlatoSchema,PlatoSchema
-from ...models.plato_model import Plato
+from ..connection import Session,platos_table,tipos_platos_table
+from ...models.plato_model import PlatoTipo
 
-def get_platos_con_tipo_db() -> List[Plato]:
-    j = join(PlatoSchema,TipoPlatoSchema,PlatoSchema.tipo_plato_id==TipoPlatoSchema.tipo_plato_id)
-    query = select(PlatoSchema,TipoPlatoSchema).select_from(j)
+def get_platos_con_tipo_db() -> List[PlatoTipo]:
+    with Session() as session:
+        j = join(   
+                    platos_table,tipos_platos_table,
+                    platos_table.c.tipo_plato_id==tipos_platos_table.c.tipo_plato_id
+                )
+        query = select(platos_table,tipos_platos_table.c.tipo_plato_icon).select_from(j)
 
-    result = session.execute(query)
-    
-    platos = [Plato(
-                id=plato.plato_id,
-                nombre=plato.plato_nombre,
-                descripcion=plato.plato_descripcion,
-                precio=plato.plato_precio,
-                tipo_id=tipo.tipo_plato_id,
-                icon=tipo.tipo_plato_icon)
-            for plato,tipo in result]
+        result = session.execute(query).fetchall()
+        platos = [PlatoTipo(
+                    id=plato[0],
+                    nombre=plato[1],
+                    descripcion=plato[2],
+                    precio=plato[3],
+                    tipo_id=plato[4],
+                    icon=plato[5])
+                    for plato in result]
 
-    return platos
+        return platos

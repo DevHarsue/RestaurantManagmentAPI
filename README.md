@@ -2,6 +2,32 @@
 
 Esta API cubrira todo lo que es la gestion para acceder, obtener, modificar y eliminar todo lo relacionado a la Base de Datos
 
+## Despliegue
+
+Para desplegar el API, primero crea un archivo .env en la raiz del repositorio con la siguiente estructura:
+
+**USER='FAKEUSER'**
+**PASSWORD='PASSWORDFAKE'**
+**HOST='FAKEHOST'**
+**DATABASE='FAKEDATABASE'**
+
+Colocar los campos para conectar a la base de datos
+
+*NOTA: En caso de no tener la base de datos, ejecutar el archivo sql para crear la base de datos*
+
+Crea un entorno virtual:
+
+*Para WINDOWS*
+**python -m venv venv**
+
+Activa el venv y luego instala las dependecias con:
+
+**pip install -r requirements.txt**
+
+Una vez hecho eso depliega con uvicorn:
+
+**uvicorn src.main:app --host 0.0.0.0 --port 5000 --reload**
+
 ## Estructura de la BD
 
 La BD contiene 9 tablas a continuacion las columnas de cada una:
