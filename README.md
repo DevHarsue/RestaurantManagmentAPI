@@ -13,7 +13,7 @@ Para desplegar el API, primero crea un archivo .env en la raiz del repositorio c
 
 Colocar los campos para conectar a la base de datos
 
-*NOTA: En caso de no tener la base de datos, ejecutar el archivo sql para crear la base de datos*
+*NOTA: En caso de no tener la base de datos, ejecutar el archivo sql para crear la base de datos (db.sql) cambiando el usuario "root" por tu usuario (basta con usar la funcion de remplazar de vscode) y el archivo insert.sql*
 
 Crea un entorno virtual:
 

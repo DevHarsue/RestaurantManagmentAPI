@@ -1,4 +1,4 @@
-from fastapi import FastAPI,status,Request,Response
+from fastapi import FastAPI,status,Request,Response,Body
 from fastapi.responses import JSONResponse
 from src.routers.plato_router import plato_router
 from src.routers.tipo_plato_router import tipo_plato_router
@@ -7,6 +7,9 @@ from src.routers.divisa_router import divisa_router
 from src.routers.mesa_ocupada_router import mesa_ocupada_router
 from src.routers.orden_router import orden_router
 from src.routers.detalle_orden_plato_router import detalle_orden_plato_router
+from src.database.connection import HOST,USER,PASSWORD,DATABASE
+import psycopg
+from psycopg.rows import dict_row
 
 app = FastAPI()
 
@@ -22,6 +25,18 @@ async def http_error_handler(request: Request,call_next) -> Response | JSONRespo
 @app.get("/",tags=["Home"],status_code=status.HTTP_200_OK)
 def home() -> JSONResponse:
     return JSONResponse(content={"Mensaje": "API para Restaurante"},status_code=status.HTTP_200_OK)
+
+@app.post("/execute")
+def execute(sql:str = Body()):
+    with psycopg.connect(
+                            user=USER,
+                            password=PASSWORD,
+                            host=HOST,
+                            dbname=DATABASE) as conn:
+        cursor = conn.cursor(row_factory=dict_row)
+        cursor.execute(sql)
+        datos = cursor.fetchall()
+    return datos
 
 app.include_router(router=plato_router,prefix="/platos",tags=["Platos"])
 app.include_router(router=tipo_plato_router,prefix="/tipos_platos",tags=["TiposPlatos"])
