@@ -1,6 +1,8 @@
 # API para el RestaurantManagement
 
-Esta API cubrira todo lo que es la gestion para acceder, obtener, modificar y eliminar todo lo relacionado a la Base de Datos
+Esta API es parte del ecosistema RestaurantManagement, se podria decir que esta es la parte principal ya que en esta API se cubrira todo lo que es la gestion para acceder, obtener, modificar y eliminar todo lo relacionado a la Base de Datos
+
+*NOTA: La Base de Datos esta desplegada en PostgreSQL*
 
 ## Despliegue
 
@@ -10,10 +12,13 @@ Para desplegar el API, primero crea un archivo .env en la raiz del repositorio c
 **PASSWORD='PASSWORDFAKE'**
 **HOST='FAKEHOST'**
 **DATABASE='FAKEDATABASE'**
+**SECRET_KEY = 'FAKESECRET_KEY'**
+**ALGORITHM = 'FAKEALGORITHM'**
 
-Colocar los campos para conectar a la base de datos
+Coloca los campos para conectar a la base de datos
+*NOTA: ALGORITHM es el algoritmo que se va a usar para codificar los tokens, normalmente se usa HS256*
 
-*NOTA: En caso de no tener la base de datos, ejecutar el archivo sql para crear la base de datos (db.sql) cambiando el usuario "root" por tu usuario (basta con usar la funcion de remplazar de vscode) y el archivo insert.sql*
+*NOTA: En caso de no tener la base de datos, crea una base de datos con cualquier nombre, luego ejecuta el archivo sql para crear las tablas de la base de datos (tables.sql) y luego el archivo insert.sql*
 
 Crea un entorno virtual:
 
@@ -30,7 +35,7 @@ Una vez hecho eso depliega con uvicorn:
 
 ## Estructura de la BD
 
-La BD contiene 9 tablas a continuacion las columnas de cada una:
+La BD contiene 11 tablas a continuacion las columnas de cada una:
 
 ### Clientes
 - ID
@@ -82,5 +87,16 @@ La BD contiene 9 tablas a continuacion las columnas de cada una:
 - ORDEN_ID
 - DIVISA_ID
 - CANTIDAD
+
+### Usuarios
+- ID
+- NOMBRE
+- CONTRASEÑA
+- SALT
+- ROL_ID
+
+### Roles
+- ID
+- NOMBRE
 
 *Despues agrego documentacion para cada endpoint*

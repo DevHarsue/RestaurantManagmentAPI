@@ -1,5 +1,5 @@
 from typing import List
-from sqlalchemy import insert,text,update
+from sqlalchemy import text,update
 from ..connection import Session,detalles_ordenes_platos_table
 from ...models.plato_model import PlatoTipoCantidad
 from ...models.detalle_orden_plato_model import DetallesOrdenPlatos,DetalleOrdenPlatoUpdate
