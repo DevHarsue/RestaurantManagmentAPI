@@ -20,4 +20,4 @@ INSERT INTO roles(rol_id,rol_nombre) values(1,'SUPERADMIN'), (2,'ADMIN'), (3,'CA
 INSERT INTO usuarios(usuario_nombre,usuario_contraseña,usuario_salt,rol_id)
 VALUES
 ('DEVELOPER','b3bfb55cd344de020638b0e9f16a65926dda2b649472e11d53d9df2cb4508f22','0691657c32860ac3364911a723ffe481',1),
-('HARSUE','4cfaaf74d4a3adffd9819da162e73314faf98d9ada91cb78dd2063dbfb7fefb6','531ba3123572a7ac11a210eef2ac7ec6',4);
+('MESERO','4cfaaf74d4a3adffd9819da162e73314faf98d9ada91cb78dd2063dbfb7fefb6','531ba3123572a7ac11a210eef2ac7ec6',4);

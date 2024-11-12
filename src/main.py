@@ -8,6 +8,7 @@ from src.routers.mesa_ocupada_router import mesa_ocupada_router
 from src.routers.initial_router import initial_router
 from src.routers.orden_router import orden_router
 from src.routers.detalle_orden_plato_router import detalle_orden_plato_router
+from src.routers.usuario_router import usuario_router
 from src.routers.token_router import token_router,decode_token,depend_rol
 from src.database.connection import HOST,USER,PASSWORD,DATABASE
 import psycopg
@@ -29,6 +30,7 @@ def home() -> JSONResponse:
     return JSONResponse(content={"Mensaje": "API para Restaurante"},status_code=status.HTTP_200_OK)
 
 app.include_router(router=token_router,prefix="/token",tags=["TOKEN"])
+app.include_router(router=usuario_router,prefix="/usuarios",tags=["Usuarios"])
 
 routers = APIRouter(dependencies=[Depends(decode_token)])
 
@@ -55,6 +57,6 @@ routers.include_router(router=divisa_router,prefix="/divisas",tags=["Divisas"])
 routers.include_router(router=mesa_ocupada_router,prefix="/mesas_ocupadas",tags=["MesasOcupadas"])
 routers.include_router(router=orden_router,prefix="/ordenes",tags=["Ordenes"])
 routers.include_router(router=detalle_orden_plato_router,prefix="/detalles_ordenes_platos",tags=["DetallesOrdenesPlatos"])
-routers.include_router(router=initial_router,prefix="/initial",tags=["INITIAL"])
+routers.include_router(router=initial_router,prefix="/initial",tags=["Initial"])
 
 app.include_router(routers)
