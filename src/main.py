@@ -30,7 +30,6 @@ def home() -> JSONResponse:
     return JSONResponse(content={"Mensaje": "API para Restaurante"},status_code=status.HTTP_200_OK)
 
 app.include_router(router=token_router,prefix="/token",tags=["TOKEN"])
-app.include_router(router=usuario_router,prefix="/usuarios",tags=["Usuarios"])
 
 routers = APIRouter(dependencies=[Depends(decode_token)])
 
@@ -58,5 +57,6 @@ routers.include_router(router=mesa_ocupada_router,prefix="/mesas_ocupadas",tags=
 routers.include_router(router=orden_router,prefix="/ordenes",tags=["Ordenes"])
 routers.include_router(router=detalle_orden_plato_router,prefix="/detalles_ordenes_platos",tags=["DetallesOrdenesPlatos"])
 routers.include_router(router=initial_router,prefix="/initial",tags=["Initial"])
+routers.include_router(router=usuario_router,prefix="/usuarios",tags=["Usuarios"])
 
 app.include_router(routers)
